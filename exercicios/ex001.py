@@ -2,7 +2,7 @@ from manim import *
 
 class PrimeiraCena(Scene):
     def construct(self):
-        formula = MathTex(r"P(A|B) = \frac{P(B|A)P(A)}{P(B)} = \text{Seu Otário}")
+        formula = MathTex(r"P(A|B) = \frac{P(B|A)P(A)}{P(B)} = \text{000}")
 
         self.play(Write(formula))
         self.wait(1)
