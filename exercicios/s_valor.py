@@ -34,11 +34,6 @@ class SValor(Scene):
         self.play(FadeIn(theta_hat_dot, scale=0.5), Write(theta_hat_label))
         self.wait(0.3)
 
-        info_emv = Text("θ̂ = estimativa de máxima verossimilhança", font_size=24).to_edge(DOWN)
-        self.play(FadeIn(info_emv))
-        self.wait(1.5)
-        self.play(FadeOut(info_emv))
-
         # ---------- Hipótese nula: Theta_0 como uma curva (reta) ----------
         # H0: theta1 = theta2  -> reta diagonal, distante do EMV
         # Definida em coordenadas do "mundo" (não em pixels) para permitir geometria exata
@@ -81,12 +76,6 @@ class SValor(Scene):
 
         conf_label = MathTex(r"\Lambda_\alpha", font_size=32, color=BLUE)
 
-        info_growing = Text(
-            "A região de confiança Λα cresce (α aumenta) a partir de θ̂...",
-            font_size=24
-        ).to_edge(DOWN)
-        self.play(FadeIn(info_growing))
-
         circle = make_circle(0.02)
         conf_label.next_to(circle, LEFT, buff=0.15)
         self.play(Create(circle), Write(conf_label))
@@ -111,12 +100,6 @@ class SValor(Scene):
         touch_dot = Dot(touch_point, color=GREEN, radius=0.09)
         touch_flash = Flash(touch_dot, color=GREEN, line_length=0.3, num_lines=12)
 
-        info_touch = Text(
-            "Primeiro ponto em que Λα toca Θ₀  →  este α define o s-valor",
-            font_size=24,
-            color=GREEN,
-        ).to_edge(DOWN)
-
         self.play(FadeIn(touch_dot), touch_flash, FadeIn(info_touch))
         self.wait(1.5)
 
@@ -133,16 +116,6 @@ class SValor(Scene):
             FadeOut(formula), FadeOut(touch_dot), FadeOut(circle), FadeOut(conf_label),
         )
 
-        # ---------- Interpretação final ----------
-        interpretacao = VGroup(
-            Text("s próximo de 1  →  Θ₀ está perto de θ̂  →  aceita-se H₀", font_size=26),
-            Text("s próximo de 0  →  Θ₀ está longe de θ̂  →  rejeita-se H₀", font_size=26),
-        ).arrange(DOWN, buff=0.4).to_edge(DOWN)
-
-        self.play(Write(interpretacao[0]))
-        self.wait(1)
-        self.play(Write(interpretacao[1]))
-        self.wait(2)
 
         self.play(*[FadeOut(m) for m in self.mobjects])
         self.wait(0.5)
